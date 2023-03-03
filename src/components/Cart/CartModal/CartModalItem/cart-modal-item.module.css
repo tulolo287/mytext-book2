@@ -1,0 +1,12 @@
+.cartModalItem {
+  display: flex;
+}
+.cartModalItem__delete {
+  font-size: 20px;
+  color: red;
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+}
+.cartmodalitem__delete:hover {
+  background-color: red;
+}
