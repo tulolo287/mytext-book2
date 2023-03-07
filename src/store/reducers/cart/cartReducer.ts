@@ -1,3 +1,15 @@
+import { Action } from "redux";
+
+interface IBook {
+  id: string;
+  qty?: number;
+}
+
+type Book = {
+  id: string,
+  name: string
+}
+
 const initialState = {
   cart: [],
   isCartModal: false,
@@ -5,7 +17,7 @@ const initialState = {
   isLoading: false
 };
 
-export default function cartReducer(state = initialState, action) {
+export default function cartReducer(state = initialState, action:Action) {
   switch (action.type) {
     case "ADD_QTY":
       return {

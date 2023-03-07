@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import s from "./cart-modal-item.module.css";
 
+
+
 const CartModalItem = ({ book }) => {
   const dispatch = useDispatch();
   const handleDelete = () => {
