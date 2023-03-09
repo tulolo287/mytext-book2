@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import s from "./cart-modal.module.css";
-import CartModalItem from "./CartModalItem";
+import CartModalItem from "../cartModalItem/CartModalItem";
 
 const CartModal = () => {
   const { cart, isCartModal } = useSelector((state) => state.cartReducer);

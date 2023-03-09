@@ -3,7 +3,7 @@ import cartReducer from "../features/cart/cartSlice";
 import thunk from "redux-thunk";
 import {configureStore} from "@reduxjs/toolkit"
 
-const rootReducer = combineReducers({ cart: cartReducer });
+const rootReducer = combineReducers({ cart: cartReducer});
 
 const store = configureStore({reducer: rootReducer, middleware: [thunk]});
 

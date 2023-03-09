@@ -4,7 +4,7 @@ import Avatar from "antd/es/avatar/avatar";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import CartModal from "../../components/Cart/CartModal";
+import CartModal from "./components/cartModal/CartModal";
 import { useAppSelector } from "../../hooks/useAppDispatchSelector";
 
 const Cart = () => {
