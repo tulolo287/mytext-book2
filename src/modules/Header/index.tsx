@@ -2,7 +2,7 @@ import Menu from "../../components/menu/Menu";
 import { pages } from "../../router/routes";
 import styles from "./header.module.css";
 import Logo from "../../components/Logo";
-import Cart from "../../components/Cart";
+import Cart from "../../features/cart/Cart";
 const Header = () => {
   return (
     <nav className={styles.header}>

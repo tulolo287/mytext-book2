@@ -1,29 +1,31 @@
-import { Action } from "redux";
+import { Reducer } from "react";
+import { Action, AnyAction } from "redux";
+import { IBook } from "../../../model/IBook";
 
-interface IBook {
-  id: string;
-  qty?: number;
-}
 
-type Book = {
-  id: string,
-  name: string
+type CartReduceActionTypePayloadType = {}
+
+type CartReduceActionType = {
+  type: string,
+  payload: IBook
 }
 
 const initialState = {
-  cart: [],
+  cart: [] as IBook[],
   isCartModal: false,
-  books: [],
+  books: [] as Array<IBook>,
   isLoading: false
 };
 
-export default function cartReducer(state = initialState, action:Action) {
+type InitialStateType = typeof initialState
+
+export default function cartReducer(state = initialState, action:AnyAction) {
   switch (action.type) {
     case "ADD_QTY":
       return {
         ...state,
         cart: state.cart.map((item) => {
-          if (item.id === action.payload) {
+          if (item.id === action.payload.id) {
             const newItem = { ...item, qty: item.qty ? ++item.qty : 2 };
             return newItem;
           } else {
@@ -35,7 +37,7 @@ export default function cartReducer(state = initialState, action:Action) {
       return {
         ...state,
         cart: state.cart.map((item) => {
-          if (item.id === action.payload) {
+          if (item.id === action.payload.id) {
             const newItem = {
               ...item,
               qty: item.qty && item.qty > 1 ? --item.qty : item.qty
@@ -53,7 +55,7 @@ export default function cartReducer(state = initialState, action:Action) {
           ? [...state.cart, { ...action.payload, qty: 1 }]
           : state.cart.map((item) => {
               if (item.id === action.payload.id) {
-                return { ...item, qty: ++item.qty };
+                return { ...item, qty: ++item.qty! };
               } else {
                 return item;
               }
@@ -67,7 +69,7 @@ export default function cartReducer(state = initialState, action:Action) {
     case "DELETE_FROM_CART":
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id != action.payload)
+        cart: state.cart.filter((item) => item.id != action.payload.id)
       };
     case "SET_BOOKS":
       return {

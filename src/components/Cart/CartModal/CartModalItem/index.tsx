@@ -8,7 +8,7 @@ import s from "./cart-modal-item.module.css";
 const CartModalItem = ({ book }) => {
   const dispatch = useDispatch();
   const handleDelete = () => {
-    dispatch({ type: "DELETE_FROM_CART", payload: book.id });
+    dispatch({ type: "DELETE_FROM_CART", payload: book});
   };
   return (
     <>
