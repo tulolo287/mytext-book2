@@ -1,4 +1,4 @@
-import Catalog from "../../components/Catalog";
+import Catalog from "../../features/catalog/Catalog";
 import LeftNav from "../../modules/LeftNav";
 import Main from "../../layouts/Main";
 

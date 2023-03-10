@@ -1,17 +1,15 @@
 import "./styles.css";
-import Header from "./modules/Header";
+import MyHeader from "./modules/MyHeader";
 import Router from "./components/Router";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fetchBooks } from "./store/reducers/cart/cartActionCreators";
+import { Content } from "antd/es/layout/layout";
 
 export default function App() {
-  const dispatch = useDispatch();
-
   return (
     <div className="App">
-      <Header />
-      <Router />
+      <MyHeader />
+      <Content>
+        <Router />
+      </Content>
     </div>
   );
 }

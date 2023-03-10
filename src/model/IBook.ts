@@ -1,6 +1,8 @@
 export interface IBook {
-   id: number;
-   title: string;
-   description: string;
-   qty?: number;
+  url: string;
+  id: number;
+  title: string;
+  description: string;
+  qty?: number;
+  thumbnailUrl: string;
 }

@@ -1,32 +1,38 @@
-import CatalogItem from "./CatalogItem";
+import CatalogItem from "./components/catalogItem/CatalogItem";
 import s from "./catalog.module.css";
 import { useSelector } from "react-redux";
-import Paginator from "../Paginator";
+
+import Paginator from "../../components/Paginator";
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
-import Spinner from "../Spinner";
+import Spinner from "../../components/Spinner";
 import { Pagination } from "antd";
+import {
+  useAppDispatch,
+  useAppSelector
+} from "../../hooks/useAppDispatchSelector";
+import { loadingOff, loadingOn, setCatalog } from "./catalogSlice";
+import { addToCart } from "../cart/cartSlice";
 
 export default function Catalog() {
-  const { isLoading } = useSelector((state) => state.cartReducer);
-  const dispatch = useDispatch();
+  const { isLoading, catalog } = useAppSelector((state) => state.catalog);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (localStorage.getItem("cart")) {
       const cart = JSON.parse(localStorage.getItem("cart"));
-      dispatch({ type: "SET_CART", payload: cart });
+      dispatch(addToCart(cart));
     }
     async function fetchData(url) {
-      dispatch({ type: "SET_LOADING", payload: true });
+      dispatch(loadingOn());
       const res = await fetch(url);
       const data = await res.json();
-      dispatch({ type: "SET_BOOKS", payload: data });
-      dispatch({ type: "SET_LOADING", payload: false });
+      dispatch(setCatalog(data));
+      dispatch(loadingOff());
     }
     fetchData("https://jsonplaceholder.typicode.com/photos?_limit=10");
   }, []);
 
-  const { books } = useSelector((state) => state.cartReducer);
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalItems = 10;
@@ -37,7 +43,7 @@ export default function Catalog() {
 
   const endSector = currentPage * itemsPerPage;
   const startSector = endSector - itemsPerPage;
-  const booksPerPage = books.slice(startSector, endSector);
+  const booksPerPage = catalog.slice(startSector, endSector);
 
   return (
     <>

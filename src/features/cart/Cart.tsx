@@ -1,16 +1,32 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge } from "antd";
 import Avatar from "antd/es/avatar/avatar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import CartModal from "./components/cartModal/CartModal";
-import { useAppSelector } from "../../hooks/useAppDispatchSelector";
+import {
+  useAppDispatch,
+  useAppSelector
+} from "../../hooks/useAppDispatchSelector";
+import { cartModalToggle, setCart } from "./cartSlice";
 
 const Cart = () => {
-  const {cart, isCartModal} = useAppSelector(state => state.cart)
-  
-  const dispatch = useDispatch();
+  const { cart, isCartModal } = useAppSelector((state) => state.cart);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("cart") &&
+      !JSON.parse(localStorage.getItem("cart")!).length
+    ) {
+      setCart(JSON.parse(localStorage.getItem("cart")!));
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } else {
+      localStorage.setItem("cart", []);
+    }
+  }, [cart]);
 
   const cartStyles = {
     fontSize: 40,
@@ -18,7 +34,7 @@ const Cart = () => {
     cursor: "pointer"
   };
   const handleModal = () => {
-    dispatch({ type: "SET_CART_MODAL" });
+    dispatch(cartModalToggle());
   };
   return (
     <div style={{ position: "relative", width: "50px" }}>

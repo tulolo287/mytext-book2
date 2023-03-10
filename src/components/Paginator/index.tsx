@@ -1,13 +1,24 @@
 import { Pagination } from "antd";
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import {
+  FC,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 
-const Paginator = ({ getCurrentPage, totalPages }) => {
+type PaginatorProps = {
+  getCurrentPage: (page: number) => void;
+  totalPages: number;
+};
+const Paginator: FC<PaginatorProps> = ({ getCurrentPage, totalPages }) => {
   const pages = [];
   for (let i = 0; i < totalPages; i++) {
     pages.push(i + 1);
   }
 
-  function handleChange(page) {
+  function handleChange(page: number) {
     getCurrentPage(page);
   }
 

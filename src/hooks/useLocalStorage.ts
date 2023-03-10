@@ -1,14 +1,9 @@
 import { useDispatch } from "react-redux";
+import { IBook } from "../model/IBook";
 
-type CartItem = {
-  id: number;
-  qty: number;
-};
-export function useLocalStorage(newCart) {
-  if (localStorage.getItem("cart")) {
+export function useLocalStorage() {
+  if (localStorage.getItem("cart") && !localStorage.getItem("cart")?.length) {
     const cart = localStorage.getItem("cart");
-    return JSON.parse(cart);
-  } else {
-    localStorage.setItem("cart", JSON.stringify(newCart));
+    return JSON.parse(cart!);
   }
 }
