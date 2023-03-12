@@ -10,23 +10,16 @@ import {
   useAppSelector
 } from "../../hooks/useAppDispatchSelector";
 import { cartModalToggle, setCart } from "./cartSlice";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { IBook } from "../../model/IBook";
 
 const Cart = () => {
   const { cart, isCartModal } = useAppSelector((state) => state.cart);
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (
-      localStorage.getItem("cart") &&
-      !JSON.parse(localStorage.getItem("cart")!).length
-    ) {
-      setCart(JSON.parse(localStorage.getItem("cart")!));
-      localStorage.setItem("cart", JSON.stringify(cart));
-    } else {
-      localStorage.setItem("cart", []);
-    }
-  }, [cart]);
+ 
+   
 
   const cartStyles = {
     fontSize: 40,

@@ -1,12 +1,11 @@
 import { FC, ReactElement } from "react";
 import { Link } from "react-router-dom";
+import { IRoute } from "../../../model/IRoute";
 
-interface IRoute {
-  name: string;
-  path: string;
-  element: ReactElement;
+type MenuItemProps = {
+  route: IRoute
 }
-const MenuItem: FC<IRoute> = ({ route }) => {
+const MenuItem: FC<MenuItemProps> = ({ route }) => {
   return (
     <>
       <Link to={route.path}>{route.name}</Link>

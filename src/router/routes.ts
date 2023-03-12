@@ -6,12 +6,9 @@ import Categories from "../pages/Categories";
 import Checkout from "../pages/Checkout";
 import LoginPage from "../pages/LoginPage";
 import React from "react";
+import { IRoute } from "../model/IRoute";
 
-interface IRoute {
-  name: string;
-  path: string;
-  element: React.ComponentType;
-}
+
 export const pages: IRoute[] = [
   { name: "Home", path: "/", element: Home },
   { name: "Books", path: "/books", element: Books },

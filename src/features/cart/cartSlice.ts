@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { IBook } from "../../model/IBook";
 import { RootState } from "../../store";
+import { getCartLocalStorage } from "../../uilities";
+
 
 const initialState = {
-  cart: [] as IBook[],
+  cart: getCartLocalStorage() as IBook[],
   isCartModal: false
 };
 export const cartSlice = createSlice({

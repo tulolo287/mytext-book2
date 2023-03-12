@@ -5,7 +5,7 @@ import { useAppSelector } from "../../hooks/useAppDispatchSelector";
 const BookItem = () => {
   const { id } = useParams();
   const { catalog } = useAppSelector((state) => state.catalog);
-  const book = catalog.find((book) => book.id == id);
+  const book = catalog.find((book) => book.id.toString() == id);
   return (
     <>
       {book ? (

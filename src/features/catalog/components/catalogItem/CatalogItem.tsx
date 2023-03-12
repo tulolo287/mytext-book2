@@ -9,12 +9,13 @@ import {
 import { IBook } from "../../../../model/IBook";
 import { FC } from "react";
 import { addToCart } from "../../../cart/cartSlice";
+import React from "react";
 
 type CatalogItemProps = {
   book: IBook;
 };
 
-const CatalogItem: FC<CatalogItemProps> = ({ book }) => {
+const CatalogItem: FC<CatalogItemProps> = React.memo( ({ book }) => {
   const { id, title, thumbnailUrl } = book;
   const dispatch = useAppDispatch();
   const { cart } = useAppSelector((state) => state.cart);
@@ -41,5 +42,5 @@ const CatalogItem: FC<CatalogItemProps> = ({ book }) => {
       </Button>
     </article>
   );
-};
+});
 export default CatalogItem;

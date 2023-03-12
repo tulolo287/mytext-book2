@@ -1,17 +1,19 @@
 import { Button } from "antd";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { selectCart } from "../../features/cart/cartSlice";
+import { useAppSelector } from "../../hooks/useAppDispatchSelector";
 
-import { Wrapper, Qty } from "./checkoutList.styled.ts";
+import { Wrapper, Qty } from "./checkoutList.styled";
 
 const CheckoutList = () => {
-  const { cart } = useSelector((state) => state.cartReducer);
+  const {cart} = useAppSelector(state => state.cart)
   const dispatch = useDispatch();
 
-  const addQty = (id) => {
+  const addQty = (id:number) => {
     dispatch({ type: "ADD_QTY", payload: id });
   };
-  const subQty = (id) => {
+  const subQty = (id:number) => {
     dispatch({ type: "SUB_QTY", payload: id });
   };
   return (

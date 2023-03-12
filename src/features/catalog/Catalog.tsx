@@ -13,17 +13,15 @@ import {
 } from "../../hooks/useAppDispatchSelector";
 import { loadingOff, loadingOn, setCatalog } from "./catalogSlice";
 import { addToCart } from "../cart/cartSlice";
+import React from "react";
 
-export default function Catalog() {
+export default React.memo(function Catalog() {
   const { isLoading, catalog } = useAppSelector((state) => state.catalog);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (localStorage.getItem("cart")) {
-      const cart = JSON.parse(localStorage.getItem("cart"));
-      dispatch(addToCart(cart));
-    }
-    async function fetchData(url) {
+ 
+    async function fetchData(url: string) {
       dispatch(loadingOn());
       const res = await fetch(url);
       const data = await res.json();
@@ -39,7 +37,7 @@ export default function Catalog() {
   const itemsPerPage = 3;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  const getCurrentPage = (currentPage) => setCurrentPage(currentPage);
+  const getCurrentPage = (currentPage: number) => setCurrentPage(currentPage);
 
   const endSector = currentPage * itemsPerPage;
   const startSector = endSector - itemsPerPage;
@@ -60,4 +58,4 @@ export default function Catalog() {
       )}
     </>
   );
-}
+})
